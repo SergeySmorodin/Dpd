@@ -1,6 +1,6 @@
-import { TaskBoard } from '../js/app';
+import { TaskBoard } from "../js/app";
 
-describe('TaskBoard', () => {
+describe("TaskBoard", () => {
   beforeEach(() => {
     document.body.innerHTML = `
       <div class="container">
@@ -18,46 +18,46 @@ describe('TaskBoard', () => {
     board.init();
   });
 
-  test('создаёт карточку при сохранении', () => {
-    const addBtn = document.querySelector('.add-card-btn');
+  test("создаёт карточку при сохранении", () => {
+    const addBtn = document.querySelector(".add-card-btn");
     addBtn.click();
 
-    const textarea = document.querySelector('textarea');
-    const saveBtn = document.querySelector('.save-btn');
+    const textarea = document.querySelector("textarea");
+    const saveBtn = document.querySelector(".save-btn");
 
-    textarea.value = 'Новая задача';
+    textarea.value = "Новая задача";
     saveBtn.click();
 
-    const card = document.querySelector('.card');
+    const card = document.querySelector(".card");
     expect(card).toBeTruthy();
-    expect(card.querySelector('.card-text').textContent).toBe('Новая задача');
-    expect(card.querySelector('.delete-icon')).toBeTruthy();
+    expect(card.querySelector(".card-text").textContent).toBe("Новая задача");
+    expect(card.querySelector(".delete-icon")).toBeTruthy();
   });
 
-  test('удаляет карточку при клике на иконку', () => {
-    const addBtn = document.querySelector('.add-card-btn');
+  test("удаляет карточку при клике на иконку", () => {
+    const addBtn = document.querySelector(".add-card-btn");
     addBtn.click();
 
-    const textarea = document.querySelector('textarea');
-    const saveBtn = document.querySelector('.save-btn');
+    const textarea = document.querySelector("textarea");
+    const saveBtn = document.querySelector(".save-btn");
 
-    textarea.value = 'Удалить меня';
+    textarea.value = "Удалить меня";
     saveBtn.click();
 
-    const deleteIcon = document.querySelector('.delete-icon');
+    const deleteIcon = document.querySelector(".delete-icon");
     deleteIcon.click();
 
-    expect(document.querySelector('.card')).toBeNull();
+    expect(document.querySelector(".card")).toBeNull();
   });
 
-  test('закрывает форму при отмене', () => {
-    const addBtn = document.querySelector('.add-card-btn');
+  test("закрывает форму при отмене", () => {
+    const addBtn = document.querySelector(".add-card-btn");
     addBtn.click();
 
-    const cancelBtn = document.querySelector('.cancel-btn');
+    const cancelBtn = document.querySelector(".cancel-btn");
     cancelBtn.click();
 
-    expect(document.querySelector('.card-form')).toBeNull();
-    expect(addBtn.style.display).toBe('block');
+    expect(document.querySelector(".card-form")).toBeNull();
+    expect(addBtn.style.display).toBe("block");
   });
 });
