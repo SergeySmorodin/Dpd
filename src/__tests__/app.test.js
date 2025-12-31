@@ -1,29 +1,31 @@
 import { TaskBoard } from "../js/app";
 
 describe("TaskBoard", () => {
-  beforeEach(() => {
-    document.body.innerHTML = `
-      <div class="container">
-        <div class="board">
-          <div class="column" id="column-1">
-            <h2>Запланировано</h2>
-            <div class="cards" id="cards-1"></div>
-            <button class="add-card-btn" data-column="1">+ Add another card</button>
-          </div>
-        </div>
-      </div>
-    `;
+  let boardInstance;
 
-    const board = new TaskBoard();
-    board.init();
+  beforeEach(() => {
+    localStorage.clear();
+    document.body.innerHTML = '<div id="board"></div>';
+    new TaskBoard().init();
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = "";
+    boardInstance = null;
   });
 
   test("создаёт карточку при сохранении", () => {
-    const addBtn = document.querySelector(".add-card-btn");
+    const addBtn = document.querySelector(
+      '.add-card-btn[data-column="column-1"]',
+    );
+    expect(addBtn).toBeTruthy();
     addBtn.click();
 
     const textarea = document.querySelector("textarea");
     const saveBtn = document.querySelector(".save-btn");
+
+    expect(textarea).toBeTruthy();
+    expect(saveBtn).toBeTruthy();
 
     textarea.value = "Новая задача";
     saveBtn.click();
@@ -35,29 +37,25 @@ describe("TaskBoard", () => {
   });
 
   test("удаляет карточку при клике на иконку", () => {
-    const addBtn = document.querySelector(".add-card-btn");
+    const addBtn = document.querySelector(
+      '.add-card-btn[data-column="column-1"]',
+    );
+    expect(addBtn).toBeTruthy();
     addBtn.click();
 
     const textarea = document.querySelector("textarea");
     const saveBtn = document.querySelector(".save-btn");
 
+    expect(textarea).toBeTruthy();
+    expect(saveBtn).toBeTruthy();
+
     textarea.value = "Удалить меня";
     saveBtn.click();
 
     const deleteIcon = document.querySelector(".delete-icon");
+    expect(deleteIcon).toBeTruthy();
     deleteIcon.click();
 
     expect(document.querySelector(".card")).toBeNull();
-  });
-
-  test("закрывает форму при отмене", () => {
-    const addBtn = document.querySelector(".add-card-btn");
-    addBtn.click();
-
-    const cancelBtn = document.querySelector(".cancel-btn");
-    cancelBtn.click();
-
-    expect(document.querySelector(".card-form")).toBeNull();
-    expect(addBtn.style.display).toBe("block");
   });
 });

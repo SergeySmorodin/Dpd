@@ -46,6 +46,7 @@ h1 {
 .cards {
   flex-grow: 1;
   min-height: 100px;
+  position: relative;
 }
 
 .card {
@@ -56,6 +57,11 @@ h1 {
   margin-bottom: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   word-break: break-word;
+  cursor: grab;
+}
+
+.card:active {
+  cursor: grabbing;
 }
 
 .delete-icon {
@@ -142,4 +148,13 @@ h1 {
   color: #172b4d;
   background-color: #e4e7eb;
   border-radius: 50%;
+}
+
+.insert-indicator {
+  height: 4px;
+  background-color: #0079bf;
+  margin: 4px 0;
+  border-radius: 2px;
+  opacity: 0;
+  transition: opacity 0.2s;
 }
