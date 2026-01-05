@@ -1,8 +1,6 @@
-import { TaskBoard } from "../js/app";
+import { TaskBoard } from "../js/taskBoard";
 
 describe("TaskBoard", () => {
-  let boardInstance;
-
   beforeEach(() => {
     localStorage.clear();
     document.body.innerHTML = '<div id="board"></div>';
@@ -11,7 +9,6 @@ describe("TaskBoard", () => {
 
   afterEach(() => {
     document.body.innerHTML = "";
-    boardInstance = null;
   });
 
   test("создаёт карточку при сохранении", () => {
