@@ -19,14 +19,15 @@ export class DragManager {
   startDrag(e, card) {
     e.preventDefault();
 
-    const cardHeight = card.offsetHeight;
+    const cardRect = card.getBoundingClientRect();
+    const cardHeight = cardRect.height;
 
     this.dragState = {
       ...this.initDragState(),
       isDragging: true,
       originalCard: card,
-      offsetX: e.clientX - card.getBoundingClientRect().left,
-      offsetY: e.clientY - card.getBoundingClientRect().top,
+      offsetX: e.clientX - cardRect.left,
+      offsetY: e.clientY - cardRect.top,
       cardHeight,
     };
 
@@ -36,6 +37,7 @@ export class DragManager {
       pointerEvents: "none",
       opacity: "0.8",
       zIndex: "1000",
+      width: `${cardRect.width}px`,
       left: `${e.clientX - this.dragState.offsetX}px`,
       top: `${e.clientY - this.dragState.offsetY}px`,
     });
